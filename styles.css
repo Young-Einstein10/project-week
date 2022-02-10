@@ -1,0 +1,90 @@
+:root {
+  /* ======== PRIMARY ======== */
+  --bright-blue: hsl(220, 98%, 61%);
+  --gradient-color-1: hsl(192, 100%, 67%);
+  --gradient-color-2: hsl(280, 87%, 65%);
+
+  /* ======== NEUTRAL:- LIGHT THEME ======== */
+  --light-gray: hsl(0, 0%, 98%);
+  --very-light-grayish-blue: hsl(236, 33%, 92%);
+  --light-grayish-blue-light: hsl(233, 11%, 84%);
+  --dark-grayish-blue-light: hsl(236, 9%, 61%);
+  --very-dark-grayish-blue: hsl(235, 19%, 35%);
+
+  /* ======== NEUTRAL:- DARK THEME ======== */
+  --very-dark-blue: hsl(235, 21%, 11%);
+  --very-dark-ds-blue: hsl(235, 24%, 19%);
+  --light-grayish-blue-dark: hsl(234, 39%, 85%);
+  --light-grayish-blue-hover: hsl(236, 33%, 92%);
+  --dark-grayish-blue-dark: hsl(234, 11%, 52%);
+  --very-dark-grayish-blue-1: hsl(233, 14%, 35%);
+  --very-dark-grayish-blue-2: hsl(237, 14%, 26%);
+
+  /* ======== FONT-SIZE ======== */
+  --font-size-base: 18px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-size: var(--font-size-base);
+  font-family: "Josefin Sans", sans-serif;
+  background-color: var(--very-dark-blue);
+  background-image: url(images/bg-desktop-dark.jpg);
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+main {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 5% 1rem;
+}
+
+header {
+  color: var(--light-gray);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 30px;
+  letter-spacing: 10px;
+}
+
+.toggle-theme {
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* ======== FORM ======== */
+form {
+  margin-top: 3rem;
+  background-color: var(--very-dark-ds-blue);
+  display: flex;
+  align-items: center;
+}
+
+form label {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+input[type="checkbox"] {
+  flex-basis: 70px;
+}
+
+input[type="text"] {
+  flex-grow: 1;
+  height: 80px;
+  font-size: 16px;
+  padding: 0 1rem;
+  border: 0;
+  background-color: var(--very-dark-grayish-blue-2);
+}
