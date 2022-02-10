@@ -43,7 +43,10 @@ body {
 main {
   max-width: 600px;
   margin: 0 auto;
-  padding: 5% 1rem;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 10%);
+  width: 100%;
 }
 
 header {
@@ -68,6 +71,7 @@ form {
   background-color: var(--very-dark-ds-blue);
   display: flex;
   align-items: center;
+  border-radius: 6px;
 }
 
 form label {
@@ -78,6 +82,9 @@ form label {
 
 input[type="checkbox"] {
   flex-basis: 70px;
+  height: 30px;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
 }
 
 input[type="text"] {
@@ -86,5 +93,43 @@ input[type="text"] {
   font-size: 16px;
   padding: 0 1rem;
   border: 0;
-  background-color: var(--very-dark-grayish-blue-2);
+  color: var(--light-gray);
+  background-color: var(--very-dark-ds-blue);
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+/* ======== TODOS WRAPPER ======== */
+.todos-wrapper {
+  margin-top: 2rem;
+  list-style: none;
+  border-radius: 6px;
+  background-color: var(--very-dark-ds-blue);
+}
+
+.todos-wrapper .todo-item {
+  padding: 1.5rem 2rem;
+  color: var(--light-grayish-blue-light);
+  font-size: 16px;
+}
+
+.todos-wrapper .footer-control {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 2rem;
+}
+
+.footer-control .filter-options {
+  display: flex;
+  align-items: center;
+}
+
+.filter-options .filter-btns,
+.clear-completed-todos {
+  background: none;
+  border: 0;
+  padding: 0;
+  color: var(--very-dark-grayish-blue);
+  margin-left: 1rem;
 }
