@@ -42,32 +42,32 @@
       </header>
 
       <form>
+        <div class="rounded-corner">
+          <!-- <button type="button" class="form-btn"></button> -->
+        </div>
         <label>
-          <input type="checkbox" />
-          <input type="text" placeholder="Create a new todo" />
+          <input
+            class="enter-todos-input"
+            type="text"
+            placeholder="Create a new todo"
+          />
         </label>
       </form>
 
-      <ul class="todos-wrapper">
-        <li class="todo-item">Complete Online Javascript Course</li>
-        <li class="todo-item">Complete Online Javascript Course</li>
-        <li class="todo-item">Complete Online Javascript Course</li>
-        <li class="todo-item">Complete Online Javascript Course</li>
-        <li class="todo-item">Complete Online Javascript Course</li>
-        <li class="todo-item">Complete Online Javascript Course</li>
+      <ul class="todos-wrapper"></ul>
+      <footer class="footer-control">
+        <span class="no-of-items-left">5 Items left</span>
 
-        <li class="footer-control">
-          <span class="no-of-items-left">5 Items left</span>
+        <div class="filter-options">
+          <button class="filter-btns">All</button>
+          <button class="filter-btns">Active</button>
+          <button class="filter-btns">Completed</button>
+        </div>
 
-          <div class="filter-options">
-            <button class="filter-btns">All</button>
-            <button class="filter-btns">Active</button>
-            <button class="filter-btns">Completed</button>
-          </div>
-
-          <button class="clear-completed-todos">Clear Completed</button>
-        </li>
-      </ul>
+        <button class="clear-completed-todos">Clear Completed</button>
+      </footer>
     </main>
+
+    <script src="app.js"></script>
   </body>
 </html>
