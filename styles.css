@@ -40,6 +40,11 @@ body {
   background-size: cover;
 }
 
+/* ======== UTILITIES ======== */
+.line-through {
+  text-decoration: line-through;
+}
+
 main {
   max-width: 600px;
   margin: 0 auto;
