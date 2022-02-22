@@ -33,11 +33,11 @@
 body {
   font-size: var(--font-size-base);
   font-family: "Josefin Sans", sans-serif;
-  background-color: var(--very-dark-blue);
-  background-image: url(images/bg-desktop-dark.jpg);
+  /* background-color: var(--very-dark-blue); */
+  background: var(--very-dark-blue) url(images/bg-desktop-dark.jpg);
   background-position: top;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
 }
 
 /* ======== UTILITIES ======== */
@@ -48,10 +48,7 @@ body {
 main {
   max-width: 600px;
   margin: 0 auto;
-  position: absolute;
-  left: 50%;
-  top: 2rem;
-  transform: translate(-50%, 2rem);
+  padding: 4rem 0;
   width: 100%;
 }
 
@@ -121,6 +118,7 @@ form label {
 
 /* ======== TODOS WRAPPER ======== */
 .todos-wrapper {
+  position: relative;
   margin-top: 2rem;
   list-style: none;
   border-top-right-radius: 6px;
@@ -137,8 +135,15 @@ form label {
   align-items: center;
 }
 
+.todos-wrapper .todo-item:hover .delete-todo-btn {
+  cursor: pointer;
+  opacity: 1;
+}
+
 .todo-item .todo {
   margin-left: 1rem;
+  flex-grow: 1;
+  transition: 0.3s ease-in;
 }
 
 .todo-item .checkbox {
@@ -166,6 +171,13 @@ form label {
 
 .todo-item .completed {
   text-decoration: line-through;
+}
+.delete-todo-btn {
+  opacity: 0;
+  background: none;
+  cursor: pointer;
+  border: 0;
+  transition: 0.3s ease-in;
 }
 
 .todo-item .checkbox:checked + .check {
@@ -196,6 +208,16 @@ form label {
   background: none;
   border: 0;
   padding: 0;
-  color: var(--light-grayish-blue-dark);
+  color: var(--dark-grayish-blue-dark);
   margin-left: 1rem;
+  cursor: pointer;
+}
+
+.filter-options .filter-btns:hover,
+.clear-completed-todos:hover {
+  color: var(--light-grayish-blue-light);
+}
+
+.is-toggled {
+  color: var(--bright-blue);
 }

@@ -2,6 +2,8 @@ const form = document.querySelector("form");
 const todosInput = document.querySelector(".enter-todos-input");
 const todosWrapper = document.querySelector(".todos-wrapper");
 const numOfTodosLeft = document.querySelector(".no-of-items-left");
+const filterBtns = document.querySelectorAll(".filter-btns");
+const clearTodosBtn = document.querySelector(".clear-completed-todos");
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -34,6 +36,35 @@ function updateTodoInLocalStorage(newTodo) {
   );
 }
 
+function filterTodos(value) {
+  const todosList = getTodosList();
+
+  const todoState = {
+    active: false,
+    completed: true,
+  };
+
+  let remainingTodos = [];
+
+  if (value === "all") {
+    remainingTodos = todosList;
+  } else {
+    remainingTodos = [...todosList].filter(
+      (todo) => todo.isCompleted === todoState[value]
+    );
+  }
+
+  // console.log(remainingTodos);
+
+  todosWrapper.innerHTML = null;
+
+  remainingTodos.forEach((todo) => {
+    renderTodoItem(todo, "filter");
+  });
+
+  updateTotalTodosLeft(remainingTodos, "filter");
+}
+
 const updateTodoItem = (todoItem, checked, id) => {
   if (checked) {
     todoItem.classList.add("line-through");
@@ -55,19 +86,29 @@ const updateTodoItem = (todoItem, checked, id) => {
   localStorage.setItem("todosList", JSON.stringify([...todosList]));
 };
 
+const removeTodoItem = (id) => {
+  const todosList = getTodosList();
+
+  const remainingTodos = todosList.filter(
+    (todo) => parseInt(todo.id) !== parseInt(id)
+  );
+
+  localStorage.setItem("todosList", JSON.stringify([...remainingTodos]));
+
+  updateTotalTodosLeft();
+};
+
 const renderTodoItem = (newTodo, action = "display") => {
   const { id, todo, isCompleted } = newTodo;
 
   if (action === "create") {
     // Add Todo to LocalStorage
-
     saveTodoInLocalStorage(newTodo);
-    // updateTotalTodosLeft();
   }
 
   const li = document.createElement("li");
   li.id = id;
-  li.className = "todo-item";
+  li.className = "todo-item pos-relative";
 
   // ======== CHECKBOX WRAPPER ========
   const checkboxWrapper = document.createElement("div");
@@ -95,6 +136,25 @@ const renderTodoItem = (newTodo, action = "display") => {
   paragraph.textContent = todo;
   checkbox.checked ? paragraph.classList.add("line-through") : null;
 
+  // ======== DELETE TODO BUTTON ========
+  const button = document.createElement("button");
+  button.className = "delete-todo-btn";
+  button.addEventListener("click", function (event) {
+    const currentTodoItem = event.target.parentElement.parentElement;
+
+    const todoId = currentTodoItem.id;
+
+    currentTodoItem.remove();
+
+    removeTodoItem(todoId);
+  });
+
+  const img = document.createElement("img");
+  img.src = "./images/icon-cross.svg";
+  img.alt = "Delete Todo Btn";
+
+  button.appendChild(img);
+
   // Append Checkbox and Check inside CheckboxWrapper
   checkboxWrapper.appendChild(checkbox);
   checkboxWrapper.appendChild(check);
@@ -102,6 +162,8 @@ const renderTodoItem = (newTodo, action = "display") => {
   // Appends Checkbox Wrapper and paragraph to li
   li.appendChild(checkboxWrapper);
   li.appendChild(paragraph);
+
+  li.appendChild(button);
 
   // Append li to todosWrapper
   todosWrapper.appendChild(li);
@@ -117,11 +179,17 @@ const displayTodos = () => {
   });
 };
 
-const updateTotalTodosLeft = () => {
-  const todosList = getTodosList();
-  const totalNumberOfTodos = todosList.length;
+const updateTotalTodosLeft = (todosList, action) => {
+  if (action === "filter") {
+    const totalNumberOfTodos = todosList.length;
 
-  numOfTodosLeft.textContent = `${totalNumberOfTodos} Items Left`;
+    numOfTodosLeft.textContent = `${totalNumberOfTodos} Items Left`;
+  } else {
+    todosList = getTodosList();
+    const totalNumberOfTodos = todosList.length;
+
+    numOfTodosLeft.textContent = `${totalNumberOfTodos} Items Left`;
+  }
 };
 
 const addNewTodo = (value) => {
@@ -135,6 +203,31 @@ const addNewTodo = (value) => {
 
   renderTodoItem(newTodo, "create");
 };
+
+filterBtns.forEach((filterBtn) => {
+  filterBtn.addEventListener("click", function (event) {
+    const filterValue = event.target.getAttribute("data-filter");
+
+    filterTodos(filterValue);
+  });
+});
+
+clearTodosBtn.addEventListener("click", function (event) {
+  console.log(event.target);
+  const todosList = getTodosList();
+
+  const incompleteTodos = todosList.filter((todo) => !todo.isCompleted);
+
+  console.log(incompleteTodos);
+
+  localStorage.setItem("todosList", JSON.stringify(incompleteTodos));
+
+  todosWrapper.innerHTML = null;
+
+  incompleteTodos.forEach((todo) => {
+    renderTodoItem(todo);
+  });
+});
 
 const clearTodosInput = () => {
   todosInput.value = "";
